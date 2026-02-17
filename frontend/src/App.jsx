@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div style={{ padding: '40px', fontFamily: 'Arial' }}>
-      <h1>School Management Portal [POC]</h1>
+      <h1>School Management Portal </h1>
       <hr />
       <h2>Student Directory</h2>
       {loading ? <p>Loading...</p> : (
