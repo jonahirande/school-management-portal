@@ -19,6 +19,12 @@ spec:
         image: docker.io/yourusername/school-backend:poc
         ports:
         - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
         env:
         - name: DATABASE_URL
           value: "postgres://admin:password123@school-db-service:5432/school_portal"
