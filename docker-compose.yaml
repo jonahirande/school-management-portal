@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  db:
+    image: postgres:13-alpine
+    container_name: school-db-poc
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: school_portal
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Backend API Service
+  backend:
+    build: ./backend
+    container_name: school-backend-poc
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: "postgres://admin:password123@db:5432/school_portal"
+    depends_on:
+      - db
+
+  # 3. Frontend UI Service
+  frontend:
+    build: ./frontend
+    container_name: school-frontend-poc
+    ports:
+      - "3000:8080" # Maps local port 3000 to the container's 8080
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
