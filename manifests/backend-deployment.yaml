@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodejs-api
-        image: docker.io/yourusername/school-backend:poc
+        image: docker.io/jonahirande/school-backend:poc
         ports:
         - containerPort: 8080
         securityContext:
